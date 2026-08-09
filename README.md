@@ -58,6 +58,11 @@ clojure -M:dev:test
 # Run the demo
 clojure -M:dev:run
 
+# Regenerate docs/samples/operator-console.html by driving the REAL actor
+# (every id/number/status on that page is actual operation -> governor ->
+# store output; two consecutive runs are byte-identical)
+clojure -M:dev:render-html
+
 # Lint
 clojure -M:lint
 ```
