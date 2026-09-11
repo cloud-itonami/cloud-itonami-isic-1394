@@ -50,21 +50,21 @@ Classic governed-actor pattern (`cordageops.operation/build`, a langgraph-clj St
 
 ```bash
 # Run tests (top-level deps.edn already pins langgraph+langchain local/root)
-clojure -M:test
+kbb -M:test
 
 # Run tests via the workspace :dev override alias (equivalent, kept for sibling-repo parity)
-clojure -M:dev:test
+kbb -M:dev:test
 
 # Run the demo
-clojure -M:dev:run
+kbb -M:dev:run
 
 # Regenerate docs/samples/operator-console.html by driving the REAL actor
 # (every id/number/status on that page is actual operation -> governor ->
 # store output; two consecutive runs are byte-identical)
-clojure -M:dev:render-html
+kbb -M:dev:render-html
 
 # Lint
-clojure -M:lint
+kbb -M:lint
 ```
 
 ## Status
