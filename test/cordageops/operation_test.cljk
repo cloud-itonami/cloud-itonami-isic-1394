@@ -4,7 +4,7 @@
   (HARD holds, escalation, phase gating) is exercised in
   `cordageops.governor-contract-test`; the Store contract in
   `cordageops.store-contract-test`."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [langgraph.graph :as g]
             [cordageops.operation :as op]
             [cordageops.store :as store]))
