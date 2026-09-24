@@ -1,0 +1,31 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; README has no "Robotics premise" section. The cordage plant twists,
+;; braids and winds fibre into rope, twine and netting, and checks output by
+;; breaking-strength testing. Its physical work here: pulling a rope sample on
+;; the tensile tester, and lifting finished rope coils onto a pallet.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-1394"
+ :cases
+ [{:id :rope-sample-proof-load
+   :kind :material
+   :procedure "tensile tester pulls a 12 mm polyester rope sample (about 70 mm2 of load-bearing fibre) to a proof load and records the elongation"
+   :params {:length-m 0.5 :area-m2 7.0e-5 :youngs-modulus-pa 5.0e9 :yield-stress-pa 60.0e6
+            :hardening-pa 5.0e8 :density-kg-m3 1380.0}
+   :sweep {:param :max-force-n :values [1000.0 2000.0 3000.0 4000.0 5000.0 6000.0]}
+   :quantity :final-strain
+   :limit {:max 0.02 :basis "estimate: a sample whose strain at the proof load exceeds 2 % has left its elastic range and fails the proof test"}
+   :boundary {:lo 500.0 :hi 12000.0}}
+  {:id :rope-coil-to-pallet
+   :kind :manipulator
+   :procedure "palletising arm lifts a finished rope coil from the coiler outfeed onto a pallet"
+   :params {:l1-m 0.60 :l2-m 0.50 :m1-kg 10.0 :m2-kg 6.0
+            :from [0.80 0.20] :to [0.40 0.60] :duration-s 2.5 :steps 400}
+   :sweep {:param :payload-kg :values [5.0 10.0 15.0 20.0 25.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 150.0 :basis "estimate: continuous shoulder torque of a mid-size (~15 kg class) palletising arm"}
+   :boundary {:lo 1.0 :hi 60.0}}]}
